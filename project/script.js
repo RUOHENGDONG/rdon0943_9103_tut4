@@ -106,6 +106,7 @@ function drawMoon(x, y) {
 }
 
 const meteors = [];
+const seeds = [];
 
 function random(min, max) {
     return Math.random() * (max - min) + min;
@@ -169,19 +170,46 @@ function animation() {
             meteors.splice(index, 1);
         }
     });
+
+    blink();
     window.requestAnimationFrame(animation);
 }
 
+function drawSeed() {
+    const svg = document.getElementById("svg");
+
+    for (let i = 0; i < 100; i++) {
+    const seed = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+    seed.setAttribute("points", "10 0 12 8 20 10 12 12 10 20 8 12 0 10 8 8");
+        seed.setAttribute("fill", "rgba(255, 255, 255)");
+        seed.setAttribute("transform", `translate(${random(0, 800)}, ${random(300, 600)})`);
+        seed.setAttribute("opacity", random(0.5, 1));
+        svg.appendChild(seed);
+        seeds.push(seed);
+    }
+}
+
+function blink() {
+    seeds.forEach((seed, index) => {
+        let opacity = parseFloat(seed.getAttribute("opacity"));
+        opacity -= 0.01;
+        seed.setAttribute("opacity", opacity);
+        if (opacity < 0) {
+            seed.setAttribute("opacity", 1);
+        }
+    });
+}
 // Execute the main draw functions on page load
 window.onload = function() {
     drawSkyBackground();
     drawMeteor();
     drawBuilding();
     drawMoon(700, 100);
+    drawSeed();
     window.requestAnimationFrame(animation);
 };
 
 window.addEventListener("click", () => {
     drawMeteor();
-    drawMoon(700, 100);
+    // drawMoon(700, 100);
 })
