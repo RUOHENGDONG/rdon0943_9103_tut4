@@ -1,6 +1,6 @@
 # rdon0943_9103_tut4
 In the basic version, a moving meteor and moon were added, the noise was improved, and a water ripple effect and bgm were added.
-Every clicks will make the shooting star and moon start again.
+Every clicks will make the meteor and moon start again.
 Detail：
 1. Meteor effects
 Generation and position:
@@ -18,3 +18,5 @@ Click interaction:
 When the user clicks on the canvas, the createWave()function generates a water wave object based on the position of the click. The water wave object stores information such as the position, radius, and transparency.
 Animation diffusion: The diffusion effect of the water ripples is achieved using the animate() function. Each time the frame is updated, the ripples gradually increase their radius and decrease their transparency, simulating the real effect of water ripples spreading outwards from the point of contact.
 Fade-out effect: The gradual decrease in transparency makes the water ripples become lighter and lighter as they spread, and eventually disappear. With this control, the water ripples simulate the visual experience of ripples on the water surface gradually dying out after being touched.
+3. Noise effect
+Use a function like drawBackgroundNoise() to generate small bright or dark dots. The position, size, and transparency of the dots are generated randomly, creating a slight grainy texture that simulates the feel of oil paint.
