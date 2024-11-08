@@ -8,6 +8,11 @@ function randomRoundedValue(maxValue) {
     return Math.round(Math.random() * maxValue);
 }
 
+// random range
+function random(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
 // A function to create a rectangle with default values and specific color
 function createRect(inputXPos, inputYPos, inputWidth, inputHeight, inputR, inputG, inputB) {
     let outputColour = makeSimpleRGB(inputR, inputG, inputB);
