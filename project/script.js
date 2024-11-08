@@ -55,6 +55,7 @@ function createRect(x, y, width, height, r, g, b) {
 }
 
 // Function to add a texture effect
+const circles = [];
 function addTexture(baseRect, r, g, b, rectWidth, rectHeight, opacity) {
     let svg = document.getElementById("svg");
 
@@ -81,6 +82,7 @@ function addTexture(baseRect, r, g, b, rectWidth, rectHeight, opacity) {
             seed.setAttribute("r", 2);
             seed.setAttribute("fill", textureColor);
             svg.appendChild(seed);
+            circles.push(seed);
         }
     }
 }
@@ -305,3 +307,34 @@ window.onload = function() {
     drawSeed();
     window.requestAnimationFrame(animation);
 };
+
+var sound;
+var peaks;
+
+function preload() {
+    sound = loadSound('bg.mp3');
+}
+
+function setup() {
+    sound.play();
+    analyzer = new p5.Amplitude(); 
+    analyzer.setInput(sound);
+}
+
+function draw() {
+    frameRate(60)
+    for (let i = 0; i < circles.length; i++) {
+        let circle = circles[i];
+        let rms = analyzer.getLevel() * 100;
+        if (rms > 0) {
+            let amp = 10;
+            let x = parseFloat(circle.getAttribute("cx"));
+            let y = parseFloat(circle.getAttribute("cy"));
+            let angle = random(0, 300 * Math.PI);
+            let dx = amp * rms * Math.cos(angle);
+            let dy = amp * rms * Math.sin(angle);
+            circle.setAttribute("cx", x + dx);
+            circle.setAttribute("cy", y + dy);
+        }
+    }
+}
