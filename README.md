@@ -1,6 +1,5 @@
 # rdon0943_9103_tut4
 In the basic version, a moving meteor and moon were added, the noise was improved, and a water ripple effect and bgm were added.
-Every clicks will make the meteor and moon start again.
 Detail：
 1. Meteor effects
 Generation and position:
